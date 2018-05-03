@@ -50,6 +50,7 @@ dependencies {
     }
 
     implementation rootProject.ext.dependencies.androidSupportAnnotations
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 

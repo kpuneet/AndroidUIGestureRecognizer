@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity
 
         dateFormat = new SimpleDateFormat("HH:mm:ss.SSS", Locale.US);
 
-        UIGestureRecognizer.setLogEnabled(BuildConfig.DEBUG);
+        UIGestureRecognizer.Companion.setLogEnabled(BuildConfig.DEBUG);
 
         mDelegate = new UIGestureRecognizerDelegate(this);
 
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity
         recognizer8.setTag("swipe");
         recognizer8.setActionListener(this);
         recognizer8.setNumberOfTouchesRequired(1);
-        recognizer8.setDirection(UISwipeGestureRecognizer.UP | UISwipeGestureRecognizer.RIGHT);
+        recognizer8.setDirection(UISwipeGestureRecognizer.Companion.getUP() | UISwipeGestureRecognizer.Companion.getRIGHT());
 
         recognizer1.requireFailureOf(recognizer2);
 
