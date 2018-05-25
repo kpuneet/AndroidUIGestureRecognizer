@@ -190,9 +190,8 @@ abstract class UIGestureRecognizer(var context: Context) : OnGestureRecognizerSt
     }
 
     protected fun fireActionEvent() {
-        if (null != mListener) {
-            mListener!!.onGestureRecognized(this)
-        }
+        logMessage(Log.INFO, "fireActionEvent: %s", this)
+        mListener?.onGestureRecognized(this)
     }
 
     protected fun addOnStateChangeListenerListener(listener: OnGestureRecognizerStateChangeListener) {
@@ -248,16 +247,12 @@ abstract class UIGestureRecognizer(var context: Context) : OnGestureRecognizerSt
      * @since 1.0.0
      */
     fun requireFailureOf(other: UIGestureRecognizer?) {
-        if (null != requireFailureOf) {
-            requireFailureOf!!.removeOnStateChangeListenerListener(this)
-        }
+        requireFailureOf?.removeOnStateChangeListenerListener(this)
         this.requireFailureOf = other
     }
 
     protected fun stopListenForOtherStateChanges() {
-        if (null != requireFailureOf) {
-            requireFailureOf!!.removeOnStateChangeListenerListener(this)
-        }
+        requireFailureOf?.removeOnStateChangeListenerListener(this)
     }
 
     protected fun listenForOtherStateChanges() {
