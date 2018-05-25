@@ -248,9 +248,10 @@ class UILongPressGestureRecognizer
                 mHandler.sendMessageDelayed(message, UIGestureRecognizer.TAP_TIMEOUT)
             } else if (inState(UIGestureRecognizer.State.Began, UIGestureRecognizer.State.Changed)) {
                 if (numberOfTouches - 1 < mTouchesRequired) {
+                    val began = hasBeganFiringEvents()
                     state = UIGestureRecognizer.State.Ended
 
-                    if (hasBeganFiringEvents()) {
+                    if (began) {
                         fireActionEvent()
                     }
 
@@ -317,8 +318,9 @@ class UILongPressGestureRecognizer
                 } else if (inState(UIGestureRecognizer.State.Began, UIGestureRecognizer.State.Changed)) {
                     mNumTaps = 0
                     mStarted = false
+                    val began = hasBeganFiringEvents()
                     state = UIGestureRecognizer.State.Ended
-                    if (hasBeganFiringEvents()) {
+                    if (began) {
                         fireActionEvent()
                     }
                     postReset()
