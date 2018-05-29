@@ -6,14 +6,12 @@ import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.util.Log
+import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.ViewConfiguration
-
-import java.util.ArrayList
-import java.util.Collections
-
 import it.sephiroth.android.library.simplelogger.LoggerFactory
-import android.util.TypedValue
+import java.lang.ref.WeakReference
+import java.util.*
 
 
 /**
@@ -29,6 +27,9 @@ import android.util.TypedValue
  */
 
 abstract class UIGestureRecognizer(var context: Context) : OnGestureRecognizerStateChangeListener {
+
+    protected val mContextRef: WeakReference<Context> = WeakReference(context)
+        get() = field
 
     private val mStateListeners = Collections.synchronizedList(ArrayList<OnGestureRecognizerStateChangeListener>())
 
@@ -99,7 +100,10 @@ abstract class UIGestureRecognizer(var context: Context) : OnGestureRecognizerSt
     protected var requireFailureOf: UIGestureRecognizer? = null
         private set
     var lastEvent: MotionEvent? = null
-        protected set
+        protected set(value) {
+            field?.let { field!!.recycle() }
+            field = value
+        }
     private val logger = LoggerFactory.getLogger(javaClass.simpleName)
 
     protected val mHandler: GestureHandler
@@ -143,6 +147,10 @@ abstract class UIGestureRecognizer(var context: Context) : OnGestureRecognizerSt
         cancelsTouchesInView = true
         isEnabled = true
         mId = generateId()
+    }
+
+    protected fun finalize() {
+        lastEvent = null
     }
 
     private fun generateId(): Long {
@@ -208,6 +216,7 @@ abstract class UIGestureRecognizer(var context: Context) : OnGestureRecognizerSt
         return mStateListeners.contains(listener)
     }
 
+    @SuppressLint("Recycle")
     open fun onTouchEvent(event: MotionEvent): Boolean {
         lastEvent = MotionEvent.obtain(event)
         return false

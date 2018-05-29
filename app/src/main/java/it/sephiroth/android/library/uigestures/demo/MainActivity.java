@@ -16,7 +16,9 @@ import it.sephiroth.android.library.uigestures.UIGestureRecognizerDelegate;
 import it.sephiroth.android.library.uigestures.UILongPressGestureRecognizer;
 import it.sephiroth.android.library.uigestures.UIPanGestureRecognizer;
 import it.sephiroth.android.library.uigestures.UIPinchGestureRecognizer;
+import it.sephiroth.android.library.uigestures.UIRectEdge;
 import it.sephiroth.android.library.uigestures.UIRotateGestureRecognizer;
+import it.sephiroth.android.library.uigestures.UIScreenEdgePanGestureRecognizer;
 import it.sephiroth.android.library.uigestures.UISwipeGestureRecognizer;
 import it.sephiroth.android.library.uigestures.UITapGestureRecognizer;
 
@@ -85,20 +87,14 @@ public class MainActivity extends AppCompatActivity
 
         recognizer1.requireFailureOf(recognizer2);
 
-        //recognizer3.requireFailureOf(recognizer4);
-        //        recognizer5.requireFailureOf(recognizer4);
-        //        recognizer8.requireFailureOf(recognizer4);
+        final UIScreenEdgePanGestureRecognizer recognizer9 = new UIScreenEdgePanGestureRecognizer(this);
+        recognizer9.setTag("screenEdge");
+        recognizer9.setEdge(UIRectEdge.LEFT);
+        recognizer9.setActionListener(this);
 
-        mDelegate.addGestureRecognizer(recognizer1);
-        mDelegate.addGestureRecognizer(recognizer2);
-        mDelegate.addGestureRecognizer(recognizer3);
-        //        mDelegate.addGestureRecognizer(recognizer2);
-        // mDelegate.addGestureRecognizer(recognizer3);
-        // mDelegate.addGestureRecognizer(recognizer4);
-        //         mDelegate.addGestureRecognizer(recognizer5);
-        // mDelegate.addGestureRecognizer(recognizer6);
-        // mDelegate.addGestureRecognizer(recognizer7);
-        // mDelegate.addGestureRecognizer(recognizer8);
+        //        recognizer3.requireFailureOf(recognizer4);
+        //        mDelegate.addGestureRecognizer(recognizer1);
+        mDelegate.addGestureRecognizer(recognizer9);
 
         // start listening for MotionEvent
 

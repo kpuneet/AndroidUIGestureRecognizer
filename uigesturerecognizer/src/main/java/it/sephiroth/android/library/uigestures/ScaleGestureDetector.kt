@@ -327,7 +327,7 @@ class ScaleGestureDetector
         mSpanSlop = ViewConfiguration.get(mContext).scaledTouchSlop * 2
 
         val res = mContext.resources
-        mMinSpan = res.getDimensionPixelSize(R.dimen.config_minScalingSpan)
+        mMinSpan = res.getDimensionPixelSize(R.dimen.gestures_config_minScalingSpan)
         numberOfTouches = 0
         // Quick scale is enabled by default after JB_MR2
         val targetSdkVersion = mContext.applicationInfo.targetSdkVersion

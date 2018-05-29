@@ -82,13 +82,9 @@ class UILongPressGestureRecognizer
 
         val touchSlop: Int
 
-        if (context == null) {
+        val configuration = ViewConfiguration.get(context)
+        touchSlop = configuration.scaledTouchSlop
 
-            touchSlop = ViewConfiguration.getTouchSlop()
-        } else {
-            val configuration = ViewConfiguration.get(context)
-            touchSlop = configuration.scaledTouchSlop
-        }
         mTouchSlopSquare = (touchSlop * touchSlop).toFloat()
         mAllowableMovementSquare = mTouchSlopSquare
     }
